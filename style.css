@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #1a001f, #330033);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    transition: transform 1s ease;
+}
+
+.etapa {
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+} 
+
+.etapa img {
+    width: 80%;
+    max-width: 350px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px rgba(255,105,180,0.5);
+}
+
+.etapa p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.texto-grande {
+    font-size: 1.4rem;
+    max-width: 90%;   
+}
+
+.declaracao {
+    background: rgba(0,0,0,0.2);
+}
+
+.final {
+    justify-content: center;
+}
+
+.amor {
+    font-size: 3em;
+    font-weight: bold;
+    animation: pulsar 2s infinite;
+}
+
+@keyframes pulsar {
+    0% { transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% { transform: scale(1);}
+}
+
+.setas {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.setas span {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.esconder {
+    opacity: 0;
+    pointer-events: none;
+}
