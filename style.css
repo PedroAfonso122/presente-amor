@@ -9,24 +9,28 @@ body {
     color: white;
     font-family: 'Arial', sans-serif;
     overflow: hidden;
+    height: 100vh;
 }
 
 .container {
     display: flex;
-    height: 100vh;
+    flex-direction: column;
+    height: 700vh;
     transition: transform 1s ease;
 }
 
 .etapa {
     width: 100vw;
     height: 100vh;
-    padding: 20px;
+    padding: 30px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    overflow-y: auto;
 } 
 
 .etapa img {
@@ -40,20 +44,21 @@ body {
 .etapa p {
     font-size: 1.2rem;
     line-height: 1.6;
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 700px;
+    white-space: pre-wrap;
 }
 
 .texto-grande {
-    font-size: 1.4rem;
-    max-width: 90%;   
+    font-size: 1.4rem;  
 }
 
 .declaracao {
     background: rgba(0,0,0,0.2);
 }
 
-.final {
-    justify-content: center;
-}
 
 .amor {
     font-size: 3em;
@@ -78,12 +83,56 @@ body {
     cursor: pointer;
 }
 
-.setas span {
-    opacity: 1;
-    transition: opacity 1s;
-}
-
 .esconder {
     opacity: 0;
     pointer-events: none;
+}
+
+.coracoes-fundo {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.coracao {
+    position: absolute;
+    bottom: -50px;
+    width: 20px;
+    height: 20px;
+    background: pink;
+    transform: rotate(45deg);
+    animation: subir 6s linear infinite;
+}
+
+.coracao::before,
+.coracao::after{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: pink;
+    border-radius: 50%;
+}
+
+.coracao::before {
+    top: -10px;
+    left: 0;
+}
+
+.coracao::after {
+    top: -10px;
+    top: 0;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+    }
 }
