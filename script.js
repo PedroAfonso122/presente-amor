@@ -40,24 +40,36 @@ function digitarTexto(indice) {
     }
 
     if (intervaloDigitar) clearInterval(intervaloDigitar);
+    
+    const paragrafo = textosHTML[indice];
+    const etapa = paragrafo.parentElement;
 
-    textosHTML[indice].textContent = "";
+    paragrafo.textContent = "";
     let i = 0;
     const velocidade = indice === 5 ? 160 : 120;
-    const paragrafo = textosHTML[indice];
+    
 
     intervaloDigitar = setInterval(() => {
         if (i < textos[indice].length) {
            paragrafo.textContent += textos[indice][i];
            i++;
-           paragrafo.scrollTo({
-            top: paragrafo.scrollHeight,
-            behavior: "smooth"
-           });
+           etapa.scrollTop = etapa.scrollHeight;
+
+           const rect = etapa.getBoundingClientRect();
+           const offset = window.scroollY + rect.bottom - window.innerHeight + 30;
+           
+           if (offset > window.scrollY) {
+            window.scrollTo({
+                top: offset,
+                behavior: "smooth"
+            });
+           }
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
             textosDigitados[indice] = paragrafo.textContent;
+
+            etapa.scrollTop = etapa.scrollHeight;
         }
     }, velocidade);
 }
