@@ -41,20 +41,27 @@ function digitarTexto(indice) {
 
     if (intervaloDigitar) clearInterval(intervaloDigitar);
 
-    textosHTML[indice].textContent = "";
+    const paragrafo = textosHTML[indice];
+    const etapa = paragrafo.parentElement;
+
+    paragrafo.textContent = "";
     let i = 0;
     const velocidade = indice === 5 ? 160 : 120;
-    const etapaElemento = textosHTML[indice].parentElement;
 
     intervaloDigitar = setInterval(() => {
         if (i < textos[indice].length) {
-           textosHTML[indice].textContent += textos[indice][i];
-           i++;
-           etapaElemento.scrollTop = etapaElemento.scrollHeight;
+            paragrafo.textContent += textos[indice][i];
+            i++;
+
+            // ✅ scroll correto no mobile + desktop
+            requestAnimationFrame(() => {
+                etapa.scrollTop = etapa.scrollHeight;
+            });
+
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
-            textosDigitados[indice] = textosHTML[indice].textContent;
+            textosDigitados[indice] = paragrafo.textContent;
         }
     }, velocidade);
 }
@@ -118,3 +125,8 @@ function fadeOutMusica() {
         }
     }, 200);
 }
+document.addEventListener("click", () => {
+    if (musica.paused) {
+        musica.play().catch(() => {});
+    }
+}, { once: true });
