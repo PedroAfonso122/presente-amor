@@ -36,30 +36,43 @@ let musicaTocando = false;
 function digitarTexto(indice) {
     if (textosDigitados[indice] !== null) {
         textosHTML[indice].textContent = textosDigitados[indice];
-        textosHTML[indice].scrollIntoView({ block: "end" });
         return;
     }
 
     if (intervaloDigitar) clearInterval(intervaloDigitar);
 
-    textosHTML[indice].textContent = "";
+    const paragrafo = textosHTML[indice];
+    const etapa = paragrafo.parentElement;
+
+    paragrafo.textContent = "";
     let i = 0;
     const velocidade = indice === 5 ? 160 : 120;
 
     intervaloDigitar = setInterval(() => {
         if (i < textos[indice].length) {
-            textosHTML[indice].textContent += textos[indice][i];
+            paragrafo.textContent += textos[indice][i];
             i++;
 
-            textosHTML[indice].scrollIntoView({
-                behavior: "auto",
-                block: "end"
+            // 🔹 posição real do texto na tela
+            const rect = paragrafo.getBoundingClientRect();
+            const offset = window.scrollY + rect.bottom - window.innerHeight + 40;
+
+            // 🔹 scroll da tela DURANTE a digitação
+            window.scrollTo({
+                top: offset > 0 ? offset : window.scrollY,
+                behavior: "smooth"
             });
 
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
-            textosDigitados[indice] = textosHTML[indice].textContent;
+            textosDigitados[indice] = paragrafo.textContent;
+
+            // garante posição correta no final
+            paragrafo.scrollIntoView({
+                behavior: "smooth",
+                block: "end"
+            });
         }
     }, velocidade);
 }
