@@ -42,7 +42,7 @@ function digitarTexto(indice) {
     if (intervaloDigitar) clearInterval(intervaloDigitar);
 
     const paragrafo = textosHTML[indice];
-    const etapa = paragrafo.parentElement;
+    const etapaElemento = paragrafo.parentElement;
 
     paragrafo.textContent = "";
     let i = 0;
@@ -53,15 +53,22 @@ function digitarTexto(indice) {
             paragrafo.textContent += textos[indice][i];
             i++;
 
-            // ✅ scroll correto no mobile + desktop
-            requestAnimationFrame(() => {
-                etapa.scrollTop = etapa.scrollHeight;
+            // ✅ força acompanhamento DURANTE a digitação
+            etapaElemento.scrollTo({
+                top: etapaElemento.scrollHeight,
+                behavior: "auto"
             });
 
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
             textosDigitados[indice] = paragrafo.textContent;
+
+            // ✅ garante posição correta no final
+            etapaElemento.scrollTo({
+                top: etapaElemento.scrollHeight,
+                behavior: "smooth"
+            });
         }
     }, velocidade);
 }
