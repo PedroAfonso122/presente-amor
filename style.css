@@ -8,8 +8,6 @@ body {
     background: linear-gradient(to bottom, #1a001f, #330033);
     color: white;
     font-family: 'Arial', sans-serif;
-    overflow: hidden;
-    height: 100vh;
 }
 
 .container {
@@ -21,16 +19,16 @@ body {
 
 .etapa {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     padding: 30px;
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     text-align: center;
 
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 } 
 
 .etapa img {
@@ -51,9 +49,6 @@ body {
     border-radius: 15px;
     max-width: 700px;
     white-space: pre-wrap;
-
-    overflow-y: auto;
-    max-height: 80vh;
 }
 
 .texto-grande {
