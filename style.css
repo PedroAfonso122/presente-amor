@@ -51,6 +51,9 @@ body {
     border-radius: 15px;
     max-width: 700px;
     white-space: pre-wrap;
+
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
 .texto-grande {

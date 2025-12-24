@@ -44,20 +44,20 @@ function digitarTexto(indice) {
     textosHTML[indice].textContent = "";
     let i = 0;
     const velocidade = indice === 5 ? 160 : 120;
-    const etapaElemento = textosHTML[indice].parentElement;
+    const paragrafo = textosHTML[indice];
 
     intervaloDigitar = setInterval(() => {
         if (i < textos[indice].length) {
-           textosHTML[indice].textContent += textos[indice][i];
+           paragrafo.textContent += textos[indice][i];
            i++;
-           etapaElemento.scrollTop({
-            top: etapaElemento.scrollHeight,
+           paragrafo.scrollTo({
+            top: paragrafo.scrollHeight,
             behavior: "smooth"
            });
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
-            textosDigitados[indice] = textosHTML[indice].textContent;
+            textosDigitados[indice] = paragrafo.textContent;
         }
     }, velocidade);
 }
