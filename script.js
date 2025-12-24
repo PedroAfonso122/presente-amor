@@ -71,7 +71,6 @@ function digitarTexto(indice) {
         }
     }, velocidade);
 }
-
 function tocarMusica(indice) {
     const novaMusica = trilha[indice].src;
 
