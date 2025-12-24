@@ -53,8 +53,16 @@ function digitarTexto(indice) {
             paragrafo.textContent += textos[indice][i];
             i++;
 
-            // 🔥 ACOMPANHAMENTO REAL
+            // 🔹 scroll normal para todas
             etapa.scrollTop = etapa.scrollHeight;
+
+            // 🔥 reforço SOMENTE na declaração
+            if (indice === 5) {
+                etapa.scrollTo({
+                    top: etapa.scrollHeight,
+                    behavior: "smooth"
+                });
+            }
 
         } else {
             clearInterval(intervaloDigitar);
