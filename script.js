@@ -42,7 +42,6 @@ function digitarTexto(indice) {
     if (intervaloDigitar) clearInterval(intervaloDigitar);
 
     const paragrafo = textosHTML[indice];
-    const etapa = paragrafo.parentElement;
 
     paragrafo.textContent = "";
     let i = 0;
@@ -53,16 +52,11 @@ function digitarTexto(indice) {
             paragrafo.textContent += textos[indice][i];
             i++;
 
-            // 🔹 scroll normal para todas
-            etapa.scrollTop = etapa.scrollHeight;
-
-            // 🔥 reforço SOMENTE na declaração
-            if (indice === 5) {
-                etapa.scrollTo({
-                    top: etapa.scrollHeight,
-                    behavior: "smooth"
-                });
-            }
+            // ✅ SCROLL QUE NÃO FALHA
+            paragrafo.scrollIntoView({
+                block: "end",
+                behavior: "smooth"
+            });
 
         } else {
             clearInterval(intervaloDigitar);
