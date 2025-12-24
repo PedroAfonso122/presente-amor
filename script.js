@@ -42,7 +42,7 @@ function digitarTexto(indice) {
     if (intervaloDigitar) clearInterval(intervaloDigitar);
 
     const paragrafo = textosHTML[indice];
-    const etapaElemento = paragrafo.parentElement;
+    const etapa = paragrafo.parentElement;
 
     paragrafo.textContent = "";
     let i = 0;
@@ -52,17 +52,14 @@ function digitarTexto(indice) {
         if (i < textos[indice].length) {
             paragrafo.textContent += textos[indice][i];
             i++;
-            // ❌ NÃO forçamos scroll aqui
+
+            // 🔥 ACOMPANHAMENTO REAL
+            etapa.scrollTop = etapa.scrollHeight;
+
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
             textosDigitados[indice] = paragrafo.textContent;
-
-            // ✅ garante que o final fique visível
-            paragrafo.scrollIntoView({
-                behavior: "smooth",
-                block: "end"
-            });
         }
     }, velocidade);
 }
