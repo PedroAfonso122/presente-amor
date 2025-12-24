@@ -50,7 +50,10 @@ function digitarTexto(indice) {
         if (i < textos[indice].length) {
            textosHTML[indice].textContent += textos[indice][i];
            i++;
-           etapaElemento.scrollTop = etapaElemento.scrollHeight;
+           etapaElemento.scrollTop({
+            top: etapaElemento.scrollHeight,
+            behavior: "smooth"
+           });
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
@@ -118,3 +121,8 @@ function fadeOutMusica() {
         }
     }, 200);
 }
+document.addEventListener("click", () => {
+    if (musica.paused) {
+        musica.play().catch(() => {});
+    }
+}, {once: true});
