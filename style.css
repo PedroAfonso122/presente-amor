@@ -23,20 +23,20 @@ body {
     width: 100vw;
     height: 100vh;
     padding: 30px;
-
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    justify-content: flex-start;
 
+    text-align: center;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 } 
 
 .etapa img {
     width: 100%;
     max-width: 320px;
-    max-height: 35vh;
+    max-height: 32vh;
     height: auto;
     object-fit: contain;
     border-radius: 20px;
