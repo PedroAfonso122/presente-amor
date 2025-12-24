@@ -4,10 +4,17 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     background: linear-gradient(to bottom, #1a001f, #330033);
     color: white;
     font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .container {
