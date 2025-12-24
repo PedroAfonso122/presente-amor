@@ -31,7 +31,6 @@ body {
     text-align: center;
 
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 } 
 
 .etapa img {
