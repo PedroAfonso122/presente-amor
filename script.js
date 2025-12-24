@@ -52,22 +52,16 @@ function digitarTexto(indice) {
         if (i < textos[indice].length) {
             paragrafo.textContent += textos[indice][i];
             i++;
-
-            // ✅ força acompanhamento DURANTE a digitação
-            etapaElemento.scrollTo({
-                top: etapaElemento.scrollHeight,
-                behavior: "auto"
-            });
-
+            // ❌ NÃO forçamos scroll aqui
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
             textosDigitados[indice] = paragrafo.textContent;
 
-            // ✅ garante posição correta no final
-            etapaElemento.scrollTo({
-                top: etapaElemento.scrollHeight,
-                behavior: "smooth"
+            // ✅ garante que o final fique visível
+            paragrafo.scrollIntoView({
+                behavior: "smooth",
+                block: "end"
             });
         }
     }, velocidade);
