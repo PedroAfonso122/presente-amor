@@ -4,41 +4,38 @@
     box-sizing: border-box;
 }
 
-
 body {
     background: linear-gradient(to bottom, #1a001f, #330033);
     color: white;
     font-family: 'Arial', sans-serif;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 700vh;
     transition: transform 1s ease;
 }
 
 .etapa {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     padding: 30px;
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
 
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 } 
 
 .etapa img {
-    width: 90%;
-    max-width: 320px;
-    max-height: 40vh;
-    object-fit: contain;
+    width: 80%;
+    max-width: 350px;
     border-radius: 20px;
     margin-bottom: 20px;
     box-shadow: 0 0 30px rgba(255,105,180,0.5);
