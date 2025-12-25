@@ -20,18 +20,17 @@ const textos = [
 ];
 
 const trilha = [
-    { src: "musicas/fundo.mp3"},
-    { src: "musicas/fundo.mp3"},
-    {src: "musicas/fundo.mp3"},
-    {src: "musicas/fundo.mp3"},
-    {src: "musicas/fundo.mp3"},
-    {src: "musicas/final.mp3"},
-    {src: "musicas/final.mp3"}
+    { src: "musicas/fundo.mp3" },
+    { src: "musicas/fundo.mp3" },
+    { src: "musicas/fundo.mp3" },
+    { src: "musicas/fundo.mp3" },
+    { src: "musicas/fundo.mp3" },
+    { src: "musicas/final.mp3" },
+    { src: "musicas/final.mp3" }
 ];
 
 const textosDigitados = Array(totalEtapas).fill(null);
 let intervaloDigitar = null;
-let musicaTocando = false;
 
 function digitarTexto(indice) {
     if (textosDigitados[indice] !== null) {
@@ -42,7 +41,8 @@ function digitarTexto(indice) {
     if (intervaloDigitar) clearInterval(intervaloDigitar);
 
     const paragrafo = textosHTML[indice];
-    const etapa = paragrafo.parentElement;
+    const etapa = paragrafo.closest(".etapa");
+    const textoContainer = etapa.querySelector(".texto-container");
 
     paragrafo.textContent = "";
     let i = 0;
@@ -53,9 +53,8 @@ function digitarTexto(indice) {
             paragrafo.textContent += textos[indice][i];
             i++;
 
-            // 🔥 ACOMPANHAMENTO REAL
-            etapa.scrollTop = etapa.scrollHeight;
-
+            /* 🔥 scroll acompanha a digitação */
+            textoContainer.scrollTop = textoContainer.scrollHeight;
         } else {
             clearInterval(intervaloDigitar);
             intervaloDigitar = null;
@@ -64,20 +63,18 @@ function digitarTexto(indice) {
     }, velocidade);
 }
 
-
 function tocarMusica(indice) {
     const novaMusica = trilha[indice].src;
 
     if (musicaAtual !== novaMusica) {
-      musica.src = novaMusica;
-      musica.loop = true;
-      musica.volume = indice >= 5 ? 0.2 : 0.3;
+        musica.src = novaMusica;
+        musica.loop = true;
+        musica.volume = indice >= 5 ? 0.2 : 0.3;
+        musica.play().catch(() => {});
+        musicaAtual = novaMusica;
+    }
+}
 
-      musica.play().catch(() => {});  
-      musicaAtual = novaMusica;
-    }  
-} 
-                
 function atualizar() {
     container.style.transform = `translateY(-${etapaAtual * 100}vh)`;
 
@@ -86,10 +83,6 @@ function atualizar() {
 
     btnVoltar.classList.toggle("esconder", etapaAtual === 0);
     btnAvancar.classList.toggle("esconder", etapaAtual === totalEtapas - 1);
-
-    if (etapaAtual === totalEtapas - 1 ) {
-        fadeOutMusica();
-    }
 }
 
 btnAvancar.onclick = () => {
@@ -106,25 +99,8 @@ btnVoltar.onclick = () => {
     }
 };
 
+window.addEventListener("load", atualizar);
 
-window.addEventListener("load", () => {
-    atualizar();
-});
-
-
-
-function fadeOutMusica() {
-    let fade = setInterval(() => {
-        if (musica.volume > 0.01) {
-            musica.volume -= 0.01;
-        } else {
-            musica.volume = 0;
-            clearInterval(fade);
-        }
-    }, 200);
-}
 document.addEventListener("click", () => {
-    if (musica.paused) {
-        musica.play().catch(() => {});
-    }
+    if (musica.paused) musica.play().catch(() => {});
 }, { once: true });

@@ -7,9 +7,13 @@
 body {
     background: linear-gradient(to bottom, #1a001f, #330033);
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;          /* 🔥 trava scroll da página */
+    height: 100vh;
 }
 
+/* CONTAINER PRINCIPAL */
 .container {
     display: flex;
     flex-direction: column;
@@ -17,49 +21,66 @@ body {
     transition: transform 1s ease;
 }
 
+/* CADA ETAPA */
 .etapa {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     padding: 30px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-} 
+    overflow: hidden;          /* 🔥 etapa não rola, só o texto */
+}
 
+/* IMAGENS */
 .etapa img {
     width: 100%;
     max-width: 320px;
     max-height: 32vh;
     height: auto;
+
     object-fit: contain;
     border-radius: 20px;
     margin-bottom: 20px;
+
     box-shadow: 0 0 30px rgba(255,105,180,0.5);
 }
 
+/* CONTAINER DO TEXTO (ÚNICO LUGAR ROLÁVEL) */
+.texto-container {
+    flex: 1;
+    width: 100%;
+    max-width: 700px;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* TEXTO */
 .etapa p {
     font-size: 1.2rem;
     line-height: 1.6;
+
     background: rgba(0,0,0,0.4);
     padding: 15px;
     border-radius: 15px;
-    max-width: 700px;
+
     white-space: pre-wrap;
 }
 
 .texto-grande {
-    font-size: 1.4rem;  
+    font-size: 1.4rem;
 }
 
 .declaracao {
     background: rgba(0,0,0,0.2);
 }
 
-
+/* TEXTO FINAL */
 .amor {
     font-size: 3em;
     font-weight: bold;
@@ -67,18 +88,21 @@ body {
 }
 
 @keyframes pulsar {
-    0% { transform: scale(1);}
-    50% {transform: scale(1.1);}
-    100% { transform: scale(1);}
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
+/* SETAS */
 .setas {
     position: fixed;
     bottom: 20px;
     width: 100%;
+
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
+
     font-size: 2em;
     cursor: pointer;
 }
@@ -88,6 +112,7 @@ body {
     pointer-events: none;
 }
 
+/* CORAÇÕES */
 .coracoes-fundo {
     position: fixed;
     inset: 0;
@@ -102,14 +127,16 @@ body {
     width: 20px;
     height: 20px;
     background: pink;
+
     transform: rotate(45deg);
     animation: subir 6s linear infinite;
 }
 
 .coracao::before,
-.coracao::after{
+.coracao::after {
     content: '';
     position: absolute;
+
     width: 20px;
     height: 20px;
     background: pink;
@@ -122,8 +149,8 @@ body {
 }
 
 .coracao::after {
-    top: -10px;
     top: 0;
+    left: -10px;
 }
 
 @keyframes subir {
